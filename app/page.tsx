@@ -3,8 +3,6 @@ import { HeroSection } from '@/components/hero-section'
 import { TopModelsChart } from '@/components/top-models-chart'
 import { LeaderboardTable } from '@/components/leaderboard-table'
 import { ModelComparison } from '@/components/model-comparison'
-import { AboutSection } from '@/components/about-section'
-import { MetricsSection } from '@/components/metrics-section'
 import { Footer } from '@/components/footer'
 
 export default function HomePage() {
@@ -15,8 +13,6 @@ export default function HomePage() {
       <TopModelsChart />
       <LeaderboardTable />
       <ModelComparison />
-      <AboutSection />
-      <MetricsSection />
       <Footer />
     </main>
   )

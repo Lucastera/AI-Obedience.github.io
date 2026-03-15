@@ -263,20 +263,4 @@ export const variations = [
   { id: 'var6', name: 'Color Space', shortName: 'Var-6', description: 'RGB, HSL, Hex encoding tests', difficulty: 2 }
 ]
 
-export const topModelsPerTask = [
-  { task: 'Best in Color Precision', models: [
-    { name: 'GPT-Image-1.5', score: 0.053 },
-    { name: 'Nano-Banana', score: 0.102 },
-    { name: 'Qwen-Image', score: 0.171 }
-  ]},
-  { task: 'Best in Color Purity', models: [
-    { name: 'Nano-Banana', score: 0.004 },
-    { name: 'GPT-Image-1.5', score: 0.015 },
-    { name: 'FLUX.1', score: 0.015 }
-  ]},
-  { task: 'Best Open Source', models: [
-    { name: 'Qwen-Image', score: 0.171 },
-    { name: 'SANA', score: 0.319 },
-    { name: 'FLUX.1', score: 0.356 }
-  ]}
-]
+

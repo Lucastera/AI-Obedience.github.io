@@ -46,7 +46,7 @@ export function ModelComparison() {
   }))
 
   return (
-    <section className="border-b border-border bg-card py-12">
+    <section id="comparison" className="border-b border-border bg-card py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-xl font-semibold text-foreground">Compare Models</h2>

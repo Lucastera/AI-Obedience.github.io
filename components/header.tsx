@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Github, FileText, Database, Mail } from 'lucide-react'
+import { Github, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function Header() {
@@ -22,31 +22,22 @@ export function Header() {
           <Link href="#leaderboard" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Leaderboard
           </Link>
-          <Link href="#about" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            About
-          </Link>
-          <Link href="#metrics" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Metrics
+          <Link href="#comparison" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Compare
           </Link>
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="hidden gap-2 sm:flex" asChild>
-            <Link href="https://github.com" target="_blank">
+          <Button variant="ghost" size="sm" className="gap-2" asChild>
+            <Link href="https://github.com/example/violin-benchmark" target="_blank">
               <Github className="h-4 w-4" />
-              <span>Code</span>
+              <span className="hidden sm:inline">GitHub</span>
             </Link>
           </Button>
-          <Button variant="ghost" size="sm" className="hidden gap-2 sm:flex" asChild>
-            <Link href="#" target="_blank">
+          <Button variant="ghost" size="sm" className="gap-2" asChild>
+            <Link href="https://arxiv.org/abs/xxxx.xxxxx" target="_blank">
               <FileText className="h-4 w-4" />
-              <span>Paper</span>
-            </Link>
-          </Button>
-          <Button size="sm" className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-            <Link href="#" target="_blank">
-              <Database className="h-4 w-4" />
-              <span>Dataset</span>
+              <span className="hidden sm:inline">Paper</span>
             </Link>
           </Button>
         </div>
