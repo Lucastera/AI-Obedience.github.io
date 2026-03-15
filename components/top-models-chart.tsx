@@ -2,10 +2,7 @@
 
 import { Bar, BarChart, XAxis, YAxis, Cell } from 'recharts'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
-import { 
-  var1Results, var2Results, var3Results, 
-  var4Results, var5CResults, var6RgbResults 
-} from '@/lib/data'
+import { var1Results, var2Results, var3Results } from '@/lib/data'
 
 const chartConfig = {
   score: { label: 'Score', color: 'var(--chart-1)' },
@@ -53,29 +50,11 @@ const closedSourceData = var1Results
     score: (1 - m.colorPrecision.mean) * 100,
   }))
 
-const var4Data = var4Results.slice(0, 5).map((m) => ({
-  name: m.model.length > 14 ? m.model.slice(0, 12) + '..' : m.model,
-  score: (1 - m.colorPrecision.mean) * 100,
-}))
-
-const var5Data = var5CResults.slice(0, 5).map((m) => ({
-  name: m.model.length > 14 ? m.model.slice(0, 12) + '..' : m.model,
-  score: (1 - m.colorPrecision.mean) * 100,
-}))
-
-const var6Data = var6RgbResults.slice(0, 5).map((m) => ({
-  name: m.model.length > 14 ? m.model.slice(0, 12) + '..' : m.model,
-  score: (1 - m.colorPrecision.mean) * 100,
-}))
-
 const chartItems = [
   { title: 'Best in Color Precision (Var-1)', data: colorPrecisionData },
   { title: 'Best in Color Purity (Var-1)', data: colorPurityData },
   { title: 'Best in Dual Block (Var-2)', data: var2Data },
   { title: 'Best in Quad Block (Var-3)', data: var3Data },
-  { title: 'Best in Fuzzy Range (Var-4)', data: var4Data },
-  { title: 'Best in Multilingual (Var-5)', data: var5Data },
-  { title: 'Best in RGB Format (Var-6)', data: var6Data },
   { title: 'Best Open Source Models', data: openSourceData },
   { title: 'Best Closed Source Models', data: closedSourceData },
 ]
