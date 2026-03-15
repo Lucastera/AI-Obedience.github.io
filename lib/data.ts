@@ -246,21 +246,10 @@ export const var3Results: ModelResult[] = [
   }
 ]
 
-export const obedienceLevels = [
-  { level: 'L1', name: 'Semantic', description: 'Overall meaning: "a cat on grass"', type: 'probabilistic' },
-  { level: 'L2', name: 'Relational', description: 'Attribute binding: "red hat, blue scarf"', type: 'probabilistic' },
-  { level: 'L3', name: 'Constraint', description: 'Negative rules: "no X", "without Y"', type: 'probabilistic' },
-  { level: 'L4', name: 'Instructional', description: 'Exact values: position, color, size', type: 'deterministic', current: true },
-  { level: 'L5', name: 'Systemic', description: 'Global layout & architecture', type: 'deterministic' }
-]
-
 export const variations = [
   { id: 'var1', name: 'Single Color', shortName: 'Var-1', description: 'Single uniform color generation', difficulty: 1 },
   { id: 'var2', name: 'Dual Block', shortName: 'Var-2', description: 'Two-color horizontal/vertical split', difficulty: 2 },
-  { id: 'var3', name: 'Quad Block', shortName: 'Var-3', description: 'Four-color 2×2 grid layout', difficulty: 3 },
-  { id: 'var4', name: 'Fuzzy Range', shortName: 'Var-4', description: 'Acceptable color range constraints', difficulty: 4 },
-  { id: 'var5', name: 'Multilingual', shortName: 'Var-5', description: 'Cross-lingual prompt evaluation', difficulty: 3 },
-  { id: 'var6', name: 'Color Space', shortName: 'Var-6', description: 'RGB, HSL, Hex encoding tests', difficulty: 2 }
+  { id: 'var3', name: 'Quad Block', shortName: 'Var-3', description: 'Four-color 2×2 grid layout', difficulty: 3 }
 ]
 
 

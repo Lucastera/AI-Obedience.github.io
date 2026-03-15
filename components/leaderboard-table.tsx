@@ -103,14 +103,9 @@ export function LeaderboardTable() {
           <h2 className="text-xl font-semibold text-foreground">Model Comparison</h2>
           
           <Tabs value={activeVariation} onValueChange={setActiveVariation}>
-            <TabsList className="grid w-full grid-cols-3 sm:w-auto sm:grid-cols-6">
-              {variations.slice(0, 3).map((v) => (
+            <TabsList className="grid w-full grid-cols-3 sm:w-auto">
+              {variations.map((v) => (
                 <TabsTrigger key={v.id} value={v.id} className="text-xs">
-                  {v.shortName}
-                </TabsTrigger>
-              ))}
-              {variations.slice(3).map((v) => (
-                <TabsTrigger key={v.id} value={v.id} disabled className="text-xs opacity-50">
                   {v.shortName}
                 </TabsTrigger>
               ))}

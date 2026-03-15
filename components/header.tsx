@@ -18,15 +18,6 @@ export function Header() {
           </div>
         </div>
         
-        <nav className="hidden items-center gap-6 md:flex">
-          <Link href="#leaderboard" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Leaderboard
-          </Link>
-          <Link href="#comparison" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Compare
-          </Link>
-        </nav>
-
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" className="gap-2" asChild>
             <Link href="https://github.com/example/violin-benchmark" target="_blank">
