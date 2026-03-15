@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Bar, BarChart, XAxis, YAxis, ResponsiveContainer, Legend, Cell } from 'recharts'
+import { Bar, BarChart, XAxis, YAxis } from 'recharts'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import {
   Select,
@@ -92,7 +92,6 @@ export function ModelComparison() {
           <div className="rounded-xl border border-border bg-background p-6">
             <h3 className="mb-4 text-sm font-medium text-muted-foreground">Color Precision Metrics</h3>
             <ChartContainer config={chartConfig} className="h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={comparisonData} layout="vertical">
                   <XAxis 
                     type="number"
@@ -114,7 +113,6 @@ export function ModelComparison() {
                   <Bar dataKey="model1" name={model1} fill="var(--chart-1)" radius={[0, 4, 4, 0]} barSize={12} />
                   <Bar dataKey="model2" name={model2} fill="var(--chart-2)" radius={[0, 4, 4, 0]} barSize={12} />
                 </BarChart>
-              </ResponsiveContainer>
             </ChartContainer>
           </div>
 
