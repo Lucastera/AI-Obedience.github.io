@@ -120,7 +120,7 @@ export function ModelComparison() {
             <h3 className="mb-4 text-sm font-medium text-muted-foreground">Model Details</h3>
             <div className="grid gap-4 sm:grid-cols-2">
               {[model1Data, model2Data].map((model, idx) => (
-                <div key={model?.model} className="rounded-lg border border-border bg-card/50 p-4">
+                <div key={`model-${idx}`} className="rounded-lg border border-border bg-card/50 p-4">
                   <div className="mb-3 flex items-center gap-2">
                     <span className={`inline-block h-3 w-3 rounded-full ${idx === 0 ? 'bg-chart-1' : 'bg-chart-2'}`} />
                     <span className="font-medium text-foreground">{model?.model}</span>
