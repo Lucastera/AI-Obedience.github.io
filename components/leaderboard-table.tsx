@@ -13,7 +13,12 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { ChevronDown, ChevronUp, Trophy, Medal, Award } from 'lucide-react'
-import { var1Results, var2Results, var3Results, variations, type ModelResult } from '@/lib/data'
+import { 
+  var1Results, var2Results, var3Results, 
+  var4Results, var5CResults, var5FResults, 
+  var6RgbResults, var6HslResults,
+  variations, type ModelResult 
+} from '@/lib/data'
 
 function getRankIcon(rank: number) {
   if (rank === 1) return <Trophy className="h-4 w-4 text-yellow-500" />
@@ -76,6 +81,16 @@ export function LeaderboardTable() {
         return var2Results
       case 'var3':
         return var3Results
+      case 'var4':
+        return var4Results
+      case 'var5c':
+        return var5CResults
+      case 'var5f':
+        return var5FResults
+      case 'var6rgb':
+        return var6RgbResults
+      case 'var6hsl':
+        return var6HslResults
       default:
         return var1Results
     }
@@ -103,9 +118,13 @@ export function LeaderboardTable() {
           <h2 className="text-xl font-semibold text-foreground">Model Comparison</h2>
           
           <Tabs value={activeVariation} onValueChange={setActiveVariation}>
-            <TabsList className="grid w-full grid-cols-3 sm:w-auto">
+            <TabsList className="flex h-auto flex-wrap gap-1 bg-transparent p-0">
               {variations.map((v) => (
-                <TabsTrigger key={v.id} value={v.id} className="text-xs">
+                <TabsTrigger 
+                  key={v.id} 
+                  value={v.id} 
+                  className="rounded-md border border-border bg-card px-3 py-1.5 text-xs data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary"
+                >
                   {v.shortName}
                 </TabsTrigger>
               ))}
