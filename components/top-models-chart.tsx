@@ -1,6 +1,6 @@
 'use client'
 
-import { Bar, BarChart, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts'
+import { Bar, BarChart, XAxis, YAxis, Cell } from 'recharts'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import { topModelsPerTask } from '@/lib/data'
 
@@ -24,7 +24,6 @@ export function TopModelsChart() {
             <div key={task.task} className="rounded-xl border border-border bg-card p-6">
               <h3 className="mb-4 text-sm font-medium text-muted-foreground">{task.task}</h3>
               <ChartContainer config={chartConfig} className="h-[180px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={task.models}
                     layout="vertical"
@@ -56,7 +55,6 @@ export function TopModelsChart() {
                       ))}
                     </Bar>
                   </BarChart>
-                </ResponsiveContainer>
               </ChartContainer>
               <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
                 <span>Lower is better</span>
