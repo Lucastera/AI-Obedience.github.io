@@ -15,3 +15,9 @@ next.user-config.*
 node_modules/
 .next/
 .DS_Store
+ColorBench-v1/
+ColorBench-v1.zip
+*.py
+temp/
+ts_tsx_export.txt
+variation_examples_code.txt

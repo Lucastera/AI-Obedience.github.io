@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { ChevronDown, ChevronUp, Trophy, Medal, Award, Info } from 'lucide-react'
+import { ChevronDown, ChevronUp, Trophy, Medal, Award } from 'lucide-react'
 import { 
   getVariationData, 
   variations, 
@@ -24,6 +24,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import Image from 'next/image'
 
 function getRankIcon(rank: number) {
   if (rank === 1) return <Trophy className="h-4 w-4 text-yellow-500" />
@@ -72,6 +73,48 @@ function getBarColor(score: number, metric: 'precision' | 'purity'): string {
   }
 }
 
+// Variation 示例数据接口
+interface VariationExample {
+  prompt: string
+  imagePath: string
+}
+
+// 每个 variation 的示例数据
+const variationExamples: Record<string, VariationExample> = {
+  var1: {
+    prompt: 'Generate an image with pure color #D7472A (Hex code).',
+    imagePath: '/examples/var1-example.png'
+  },
+  var2: {
+    prompt: 'Specified in Hex code, create an image divided vertically into two even halves: left color #BA2B77, right color #E3A045.',
+    imagePath: '/examples/var2-example.png'
+  },
+  var3: {
+    prompt: 'Specified in Hex code, generate an image divided into four quadrants: bottom-left color #4FBF9A, bottom-right color #E7E1E9, top-left color #E68697, top-right color #AC4AC3. Ensure clean division.',
+    imagePath: '/examples/var3-example.png'
+  },
+  var4: {
+    prompt: 'Represented in Hex code, produce a consistent backdrop entirely in one solid color between #91215C and #D44491.',
+    imagePath: '/examples/var4-example.png'
+  },
+  'var5-chinese': {
+    prompt: '使用颜色 #F0A121（十六进制代码）创建一个纯色背景。',
+    imagePath: '/examples/var5-chinese-example.png'
+  },
+  'var5-french': {
+    prompt: 'Créez un fond uni avec la couleur #39964A (code hexadécimal).',
+    imagePath: '/examples/var5-french-example.png'
+  },
+  'var6-rgb': {
+    prompt: 'Produce a flat backdrop entirely in color rgb(114, 103, 44).',
+    imagePath: '/examples/var6-rgb-example.png'
+  },
+  'var6-hsl': {
+    prompt: 'Create a flat surface in color hsl(4, 53%, 31%). Ensure the color is exact, without any variation.',
+    imagePath: '/examples/var6-hsl-example.png'
+  }
+}
+
 export function LeaderboardTable() {
   const [activeVariation, setActiveVariation] = useState('var1')
   const [expandedRow, setExpandedRow] = useState<string | null>(null)
@@ -82,13 +125,13 @@ export function LeaderboardTable() {
   
   const sortedData = useMemo(() => {
     return [...currentData]
-      .filter(m => m.colorPrecision.mean > 0) // Filter out N/A data
+      .filter(m => m.colorPrecision.mean > 0)
       .sort((a, b) => {
         let valueA, valueB
         if (sortKey === 'overall') {
           valueA = calculateOverallScore(a)
           valueB = calculateOverallScore(b)
-          return sortAsc ? valueB - valueA : valueA - valueB // Reverse for overall (higher is better)
+          return sortAsc ? valueB - valueA : valueA - valueB
         } else if (sortKey === 'precision') {
           valueA = a.colorPrecision.mean
           valueB = b.colorPrecision.mean
@@ -105,11 +148,12 @@ export function LeaderboardTable() {
       setSortAsc(!sortAsc)
     } else {
       setSortKey(key)
-      setSortAsc(key === 'overall' ? false : true) // Default desc for overall
+      setSortAsc(key === 'overall' ? false : true)
     }
   }
 
   const currentVariation = variations.find(v => v.id === activeVariation)
+  const currentExample = variationExamples[activeVariation]
 
   return (
     <section id="leaderboard" className="bg-background py-12">
@@ -139,30 +183,47 @@ export function LeaderboardTable() {
           </TabsList>
         </Tabs>
 
-        {/* Task Description Card */}
+        {/* Compact Task Description Card with Inline Example */}
         <div className="mb-6 rounded-xl border border-border bg-card p-4">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">{currentVariation?.icon}</span>
-              <div>
-                <Badge variant="outline" className="mb-1 border-primary/50 text-primary">
+          <div className="flex items-start gap-4">
+            {/* Left: Badge + Description + Example */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-2">
+                <Badge variant="outline" className="border-primary/50 text-primary">
                   {currentVariation?.name}
                 </Badge>
-                <p className="text-sm text-muted-foreground">
-                  {currentVariation?.description}
-                </p>
+              </div>
+              <p className="text-sm text-muted-foreground mb-3">
+                {currentVariation?.description}
+              </p>
+              
+              {/* Inline Example Prompt */}
+              <div className="flex items-start gap-2 text-xs">
+                <span className="font-medium text-muted-foreground shrink-0">Example:</span>
+                <code className="text-foreground/80 break-words">
+                  {currentExample?.prompt || 'Example prompt will be added...'}
+                </code>
               </div>
             </div>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="ghost" size="icon" className="shrink-0">
-                  <Info className="h-4 w-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent className="max-w-xs">
-                <p className="text-xs">{currentVariation?.examplePrompt}</p>
-              </TooltipContent>
-            </Tooltip>
+
+            {/* Right: Square Example Image */}
+            <div className="shrink-0">
+              <div className="relative w-24 h-24 rounded-lg border-2 border-border bg-muted/30 overflow-hidden">
+                {currentExample?.imagePath ? (
+                  <Image
+                    src={currentExample.imagePath}
+                    alt={`${currentVariation?.name} example`}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-[10px] text-center p-1">
+                    Image
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -247,6 +308,9 @@ export function LeaderboardTable() {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-3">
+                          <span className="w-12 text-left text-sm font-mono text-emerald-400">
+                            {calculateOverallScore(model).toFixed(1)}
+                          </span>
                           <div className="flex-1">
                             <ProgressBar 
                               value={calculateOverallScore(model)} 
@@ -254,13 +318,13 @@ export function LeaderboardTable() {
                               color="bg-gradient-to-r from-emerald-500 to-green-500" 
                             />
                           </div>
-                          <span className="w-12 text-right text-sm font-mono text-emerald-400">
-                            {calculateOverallScore(model).toFixed(1)}
-                          </span>
                         </div>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-3">
+                          <span className={`w-16 text-left text-sm font-mono ${getScoreColor(model.colorPrecision.mean, 'precision')}`}>
+                            {model.colorPrecision.mean.toFixed(3)}
+                          </span>
                           <div className="flex-1">
                             <ProgressBar 
                               value={model.colorPrecision.mean} 
@@ -268,13 +332,13 @@ export function LeaderboardTable() {
                               color={getBarColor(model.colorPrecision.mean, 'precision')} 
                             />
                           </div>
-                          <span className={`w-16 text-right text-sm font-mono ${getScoreColor(model.colorPrecision.mean, 'precision')}`}>
-                            {model.colorPrecision.mean.toFixed(3)}
-                          </span>
                         </div>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-3">
+                          <span className={`w-16 text-left text-sm font-mono ${getScoreColor(model.colorPurity.mean, 'purity')}`}>
+                            {model.colorPurity.mean.toFixed(3)}
+                          </span>
                           <div className="flex-1">
                             <ProgressBar 
                               value={model.colorPurity.mean} 
@@ -282,9 +346,6 @@ export function LeaderboardTable() {
                               color={getBarColor(model.colorPurity.mean, 'purity')} 
                             />
                           </div>
-                          <span className={`w-16 text-right text-sm font-mono ${getScoreColor(model.colorPurity.mean, 'purity')}`}>
-                            {model.colorPurity.mean.toFixed(3)}
-                          </span>
                         </div>
                       </TableCell>
                     </TableRow>
