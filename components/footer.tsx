@@ -2,6 +2,7 @@
 
 import { Github, FileText } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export function Footer() {
   return (
@@ -10,8 +11,14 @@ export function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:justify-between">
           <div className="max-w-sm">
             <div className="mb-3 flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10">
-                <span className="text-sm font-bold text-primary">V</span>
+              {/* 替换为 logo.png */}
+              <div className="relative h-7 w-7 overflow-hidden rounded-lg">
+                <Image
+                  src="/logo.png"
+                  alt="VIOLIN Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <span className="font-bold text-foreground">VIOLIN</span>
             </div>
@@ -20,14 +27,14 @@ export function Footer() {
             </p>
             <div className="mt-4 flex items-center gap-3">
               <Link
-                href="https://github.com/example/violin-benchmark"
+                href="https://github.com/AI-Obedience"
                 target="_blank"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 <Github className="h-5 w-5" />
               </Link>
               <Link
-                href="https://arxiv.org/abs/xxxx.xxxxx"
+                href="https://openreview.net/pdf?id=JQTyY0XVK2"
                 target="_blank"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
@@ -43,9 +50,6 @@ export function Footer() {
 {`@inproceedings{violin2026,
   title={Why is Generating a Pure 
     Color Image Harder than CyberPunk?},
-  author={Anonymous},
-  booktitle={ICML},
-  year={2026}
 }`}
               </pre>
             </div>
