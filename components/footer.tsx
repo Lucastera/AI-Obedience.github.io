@@ -34,7 +34,7 @@ export function Footer() {
                 <Github className="h-5 w-5" />
               </Link>
               <Link
-                href="https://openreview.net/pdf?id=JQTyY0XVK2"
+                href="https://arxiv.org/abs/2603.00166"
                 target="_blank"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >

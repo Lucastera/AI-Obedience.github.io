@@ -34,7 +34,7 @@ export function Header() {
             </Link>
           </Button>
           <Button variant="ghost" size="sm" className="gap-2" asChild>
-            <Link href="https://openreview.net/pdf?id=JQTyY0XVK2" target="_blank">
+            <Link href="https://arxiv.org/abs/2603.00166" target="_blank">
               <FileText className="h-4 w-4" />
               <span className="hidden sm:inline">Paper</span>
             </Link>
